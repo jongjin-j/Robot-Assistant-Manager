@@ -12,8 +12,65 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { RobotPing } from "@/components/custom/RobotPing";
+import { RobotsList } from "@/components/custom/RobotsList";
 
-const tags = Array.from({ length: 8 }).map((_, i, a) => `Robot_${i + 1}`);
+const tags = Array.from({ length: 8 }).map(
+  (_, i, a) =>
+    `Robot_${i + 1} Robot_${i + 1} Robot_${i + 1} Robot_${i + 1} Robot_${
+      i + 1
+    } Robot_${i + 1} Robot_${i + 1}`
+);
+
+const robots = [
+  {
+    id: "1",
+    name: "Robot_1",
+    max_x: 600,
+    max_y: 500,
+    loc_x: 100,
+    loc_y: 100,
+    status: "Idle",
+    progress: 60,
+  },
+  {
+    id: "2",
+    name: "Robot_2",
+    max_x: 600,
+    max_y: 500,
+    loc_x: 300,
+    loc_y: 400,
+    status: "In Progress",
+    progress: 60,
+  },
+  {
+    id: "3",
+    name: "Robot_3",
+    max_x: 600,
+    max_y: 500,
+    loc_x: 200,
+    loc_y: 300,
+    status: "Completed",
+    progress: 60,
+  },
+  {
+    id: "4",
+    name: "Robot_4",
+    max_x: 600,
+    max_y: 500,
+    loc_x: 500,
+    loc_y: 30,
+    status: "Error",
+    progress: 60,
+  },
+];
 
 export default function Dashboard() {
   const { auth, setAuth } = useAuth()!;
@@ -23,25 +80,7 @@ export default function Dashboard() {
       <CustomSidebar />
       <div className="ml-5 grid grid-cols-4 gap-4 flex-grow mt-10">
         <div>
-          <ScrollArea className="h-72 w-full rounded-md border">
-            <div className="p-4">
-              <h4 className="mb-4 text-md leading-none text-muted-foreground font-bold">
-                Robots (8)
-              </h4>
-              <Separator className="my-2" />
-              {tags.map((tag) => (
-                <Button variant="outline" className="w-full mt-2">
-                  <div
-                    key={tag}
-                    className="flex flex-col ml-0 mr-auto"
-                    onClick={() => console.log("hi")}
-                  >
-                    <div className="text-sm">► &nbsp; &nbsp; &nbsp;{tag}</div>
-                  </div>
-                </Button>
-              ))}
-            </div>
-          </ScrollArea>
+          <RobotsList robots={robots} />
           <ScrollArea className="h-72 w-full rounded-md border mt-10">
             <div className="p-4">
               <h4 className="mb-4 text-md font-bold leading-none text-muted-foreground">
@@ -72,33 +111,9 @@ export default function Dashboard() {
             </Select>
           </div>
           <div className="mt-10 ml-auto mr-auto bg-black w-[80%] h-3/4 rounded-md">
-            <div className="relative flex flex-col h-5 w-20 top-[50%] left-[6%]">
-              <span className="text-white text-sm mb-1 ml-auto mr-auto">
-                Robot_1
-              </span>
-              <span className="flex h-5 w-5 ml-auto mr-auto">
-                <span className="animate-ping absolute inline-flex h-5 w-5 rounded-full bg-white opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-5 w-5 bg-white"></span>
-              </span>
-            </div>
-            <div className="relative flex flex-col h-5 w-20 top-[80%] left-[6%]">
-              <span className="text-white text-sm mb-1 ml-auto mr-auto">
-                Robot_2
-              </span>
-              <span className="flex h-5 w-5 ml-auto mr-auto">
-                <span className="animate-ping absolute inline-flex h-5 w-5 rounded-full bg-white opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-5 w-5 bg-white"></span>
-              </span>
-            </div>
-            <div className="relative flex flex-col h-5 w-20 top-[50%] left-[60%]">
-              <span className="text-white text-sm mb-1 ml-auto mr-auto">
-                Robot_3
-              </span>
-              <span className="flex h-5 w-5 ml-auto mr-auto">
-                <span className="animate-ping absolute inline-flex h-5 w-5 rounded-full bg-white opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-5 w-5 bg-white"></span>
-              </span>
-            </div>
+            {robots.map((robot) => (
+              <RobotPing robot={robot} key={robot.id} />
+            ))}
           </div>
         </div>
       </div>
