@@ -2,23 +2,29 @@ import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import { Progress } from "../ui/progress";
 import { ScrollArea } from "../ui/scroll-area";
 import { Separator } from "../ui/separator";
 
-interface Robot {
-  id: string;
-  name: string;
-  max_x: number;
-  max_y: number;
-  loc_x: number;
-  loc_y: number;
-}
+import { Robot } from "@/lib/types";
+import { RobotStatus, ColorClassNames } from "@/lib/types";
 
 interface RobotPingProps {
   robots: Robot[];
 }
 
 export const RobotsList = ({ robots }: RobotPingProps) => {
+  const getStatusClass = (status: string) => {
+    switch (status) {
+      case RobotStatus.COMPLETED:
+        return ColorClassNames.COMPLETED;
+      case RobotStatus.ERROR:
+        return ColorClassNames.ERROR;
+      default:
+        return ColorClassNames.IN_PROGRESS;
+    }
+  };
+
   return (
     <ScrollArea className="h-72 w-full rounded-md border">
       <div key="0" className="p-4">
@@ -80,6 +86,22 @@ export const RobotsList = ({ robots }: RobotPingProps) => {
                       defaultValue={robot.loc_y}
                       className="col-span-2 h-8"
                       disabled
+                    />
+                  </div>
+                  <div className="grid grid-cols-3 items-center gap-4">
+                    <Label htmlFor="status">Status</Label>
+                    <Input
+                      id="status"
+                      defaultValue={robot.status}
+                      className="col-span-2 h-8"
+                      disabled
+                    />
+                  </div>
+                  <div className="grid grid-cols-3 items-center gap-4 mt-2">
+                    <Label htmlFor="status">Progress</Label>
+                    <Progress
+                      value={robot.progress}
+                      className={getStatusClass(robot.status)}
                     />
                   </div>
                 </div>

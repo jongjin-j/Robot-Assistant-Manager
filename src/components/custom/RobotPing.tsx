@@ -1,21 +1,43 @@
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
-
-interface Robot {
-  id: string;
-  name: string;
-  max_x: number;
-  max_y: number;
-  loc_x: number;
-  loc_y: number;
-}
+import {
+  Robot,
+  RobotStatus,
+  ColorClassNames,
+  AnimateColorClassNames,
+} from "@/lib/types";
+import { Progress } from "../ui/progress";
 
 interface RobotPingProps {
   robot: Robot;
 }
 
 export const RobotPing = ({ robot }: RobotPingProps) => {
+  const getStatusClass = (status: string) => {
+    switch (status) {
+      case RobotStatus.COMPLETED:
+        return ColorClassNames.COMPLETED;
+      case RobotStatus.ERROR:
+        return ColorClassNames.ERROR;
+      default:
+        return ColorClassNames.IN_PROGRESS;
+    }
+  };
+
+  const getPingStatusClass = (status: string) => {
+    switch (status) {
+      case RobotStatus.COMPLETED:
+        return AnimateColorClassNames.COMPLETED;
+      case RobotStatus.ERROR:
+        return AnimateColorClassNames.ERROR;
+      case RobotStatus.IN_PROGRESS:
+        return AnimateColorClassNames.IN_PROGRESS;
+      default:
+        return AnimateColorClassNames.IDLE;
+    }
+  };
+
   return (
     <div
       className="relative flex flex-col h-5 w-20"
@@ -32,7 +54,7 @@ export const RobotPing = ({ robot }: RobotPingProps) => {
         <PopoverTrigger asChild>
           <span className="flex h-5 w-5 ml-auto mr-auto cursor-pointer">
             <span className="animate-ping absolute inline-flex h-5 w-5 rounded-full bg-white opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-5 w-5 bg-white"></span>
+            <span className={getPingStatusClass(robot.status)}></span>
           </span>
         </PopoverTrigger>
         <PopoverContent className="w-80">
@@ -76,6 +98,22 @@ export const RobotPing = ({ robot }: RobotPingProps) => {
                   defaultValue={robot.loc_y}
                   className="col-span-2 h-8"
                   disabled
+                />
+              </div>
+              <div className="grid grid-cols-3 items-center gap-4">
+                <Label htmlFor="status">Status</Label>
+                <Input
+                  id="status"
+                  defaultValue={robot.status}
+                  className="col-span-2 h-8"
+                  disabled
+                />
+              </div>
+              <div className="grid grid-cols-3 items-center gap-4 mt-2">
+                <Label htmlFor="status">Progress</Label>
+                <Progress
+                  value={robot.progress}
+                  className={getStatusClass(robot.status)}
                 />
               </div>
             </div>

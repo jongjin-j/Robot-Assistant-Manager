@@ -1,6 +1,5 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import { useAuth } from "./provider";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
@@ -12,15 +11,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
 import { RobotPing } from "@/components/custom/RobotPing";
 import { RobotsList } from "@/components/custom/RobotsList";
+import { RobotStatus } from "@/lib/types";
 
 const tags = Array.from({ length: 8 }).map(
   (_, i, a) =>
@@ -37,8 +30,8 @@ const robots = [
     max_y: 500,
     loc_x: 100,
     loc_y: 100,
-    status: "Idle",
-    progress: 60,
+    status: RobotStatus.IDLE,
+    progress: 0,
   },
   {
     id: "2",
@@ -47,7 +40,7 @@ const robots = [
     max_y: 500,
     loc_x: 300,
     loc_y: 400,
-    status: "In Progress",
+    status: RobotStatus.IN_PROGRESS,
     progress: 60,
   },
   {
@@ -57,8 +50,8 @@ const robots = [
     max_y: 500,
     loc_x: 200,
     loc_y: 300,
-    status: "Completed",
-    progress: 60,
+    status: RobotStatus.COMPLETED,
+    progress: 100,
   },
   {
     id: "4",
@@ -67,7 +60,7 @@ const robots = [
     max_y: 500,
     loc_x: 500,
     loc_y: 30,
-    status: "Error",
+    status: RobotStatus.ERROR,
     progress: 60,
   },
 ];
@@ -110,6 +103,7 @@ export default function Dashboard() {
               </SelectContent>
             </Select>
           </div>
+          {/* Robot Map */}
           <div className="mt-10 ml-auto mr-auto bg-black w-[80%] h-3/4 rounded-md">
             {robots.map((robot) => (
               <RobotPing robot={robot} key={robot.id} />

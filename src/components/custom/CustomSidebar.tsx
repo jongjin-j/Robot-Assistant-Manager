@@ -12,21 +12,22 @@ import {
 } from "@/components/ui/sidebar";
 import { Gauge, Logs, User2, Bot } from "lucide-react";
 import { Button } from "../ui/button";
+import { redirect } from "next/navigation";
 
 const items = [
   {
     title: "Dashboard",
-    url: "#",
+    url: "/",
     icon: Gauge,
   },
   {
     title: "Logs",
-    url: "#",
+    url: "/logs",
     icon: Logs,
   },
   {
     title: "Account",
-    url: "#",
+    url: "/account",
     icon: User2,
   },
 ];
@@ -37,7 +38,7 @@ export const CustomSidebar = () => {
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton size="lg">
+            <SidebarMenuButton size="lg" onClick={() => redirect("/")}>
               <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
                 <Bot className="size-4" />
               </div>
