@@ -14,6 +14,7 @@ import {
 import { RobotPing } from "@/components/custom/RobotPing";
 import { RobotsList } from "@/components/custom/RobotsList";
 import { RobotStatus } from "@/lib/types";
+import { ChartNoAxesColumnIncreasing } from "lucide-react";
 
 const tags = Array.from({ length: 8 }).map(
   (_, i, a) =>
@@ -76,9 +77,12 @@ export default function Dashboard() {
           <RobotsList robots={robots} />
           <ScrollArea className="h-72 w-full rounded-md border mt-10">
             <div className="p-4">
-              <h4 className="mb-4 text-md font-bold leading-none text-muted-foreground">
-                Error Report (20)
-              </h4>
+              <div className="flex justify-between">
+                <h4 className="text-md font-bold leading-none text-muted-foreground mb-2">
+                  Error Report (20)
+                </h4>
+                <ChartNoAxesColumnIncreasing className="cursor-pointer hover:bg-gray-100 rounded-md" />
+              </div>
               <Separator className="mt-2" />
               <ul className="my-3 ml-2 list-disc [&>li]:mt-2">
                 {tags.map((tag) => (

@@ -7,26 +7,18 @@ import { ScrollArea } from "../ui/scroll-area";
 import { Separator } from "../ui/separator";
 
 import { Robot } from "@/lib/types";
-import { RobotStatus, ColorClassNames } from "@/lib/types";
+import { RobotStatus } from "@/lib/types";
 
 interface RobotPingProps {
   robots: Robot[];
 }
 
 export const RobotsList = ({ robots }: RobotPingProps) => {
-  const getStatusClass = (status: string) => {
-    switch (status) {
-      case RobotStatus.COMPLETED:
-        return ColorClassNames.COMPLETED;
-      case RobotStatus.ERROR:
-        return ColorClassNames.ERROR;
-      default:
-        return ColorClassNames.IN_PROGRESS;
-    }
-  };
-
   return (
     <ScrollArea className="h-72 w-full rounded-md border">
+      <div className="bg-green-500"></div>
+      <div className="bg-red-500"></div>
+      <div className="bg-gray-500"></div>
       <div key="0" className="p-4">
         <h4 className="mb-4 text-md leading-none text-muted-foreground font-bold">
           Robots (8)
@@ -99,10 +91,22 @@ export const RobotsList = ({ robots }: RobotPingProps) => {
                   </div>
                   <div className="grid grid-cols-3 items-center gap-4 mt-2">
                     <Label htmlFor="status">Progress</Label>
-                    <Progress
-                      value={robot.progress}
-                      className={getStatusClass(robot.status)}
-                    />
+                    {robot.status == RobotStatus.COMPLETED ? (
+                      <Progress
+                        value={robot.progress}
+                        className="w-full col-span-2 [&>*]:bg-green-500"
+                      />
+                    ) : robot.status === RobotStatus.ERROR ? (
+                      <Progress
+                        value={robot.progress}
+                        className="w-full col-span-2 [&>*]:bg-red-500"
+                      />
+                    ) : (
+                      <Progress
+                        value={robot.progress}
+                        className="w-full col-span-2"
+                      />
+                    )}
                   </div>
                 </div>
               </div>

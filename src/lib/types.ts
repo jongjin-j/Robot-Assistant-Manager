@@ -5,7 +5,7 @@ export interface Robot {
 	max_y: number;
 	loc_x: number;
 	loc_y: number;
-	status: string;
+	status: RobotStatus;
 	progress: number;
 }
 
@@ -19,8 +19,8 @@ export enum RobotStatus {
 export enum ColorClassNames {
   IDLE = "w-full col-span-2",
   IN_PROGRESS = "w-full col-span-2",
-  COMPLETED = "w-full col-span-2 [&>*]:bg-green-600",
-  ERROR = "w-full col-span-2 [&>*]:bg-red-600",
+  COMPLETED = "w-full col-span-2 [&>*]:bg-green-500",
+  ERROR = "w-full col-span-2 [&>*]:bg-red-500",
 }
 
 export enum AnimateColorClassNames {
