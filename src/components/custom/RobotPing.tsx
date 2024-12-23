@@ -7,13 +7,21 @@ import {
   ColorClassNames,
   AnimateColorClassNames,
 } from "@/lib/types";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
 import { Progress } from "../ui/progress";
 
 interface RobotPingProps {
   robot: Robot;
+  setRobots: (updater: (prevRobots: Robot[]) => Robot[]) => void;
 }
 
-export const RobotPing = ({ robot }: RobotPingProps) => {
+export const RobotPing = ({ robot, setRobots }: RobotPingProps) => {
   const getStatusClass = (status: string) => {
     switch (status) {
       case RobotStatus.COMPLETED:
@@ -38,12 +46,41 @@ export const RobotPing = ({ robot }: RobotPingProps) => {
     }
   };
 
+  const handleXLocChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    robot: Robot
+  ) => {
+    const updatedRobot: Robot = {
+      ...robot,
+      loc_x: parseInt(event.target.value),
+    };
+
+    setRobots((prevRobots) =>
+      prevRobots.map((r) => (r.id === updatedRobot.id ? updatedRobot : r))
+    );
+  };
+
+  const handleYLocChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    robot: Robot
+  ) => {
+    const updatedRobot: Robot = {
+      ...robot,
+      loc_y: parseInt(event.target.value),
+    };
+
+    setRobots((prevRobots) =>
+      prevRobots.map((r) => (r.id === updatedRobot.id ? updatedRobot : r))
+    );
+  };
+
   return (
     <div
       className="relative flex flex-col h-5 w-20"
       style={{
         top: `${(robot.loc_y / robot.max_y) * 100}%`,
         left: `${(robot.loc_x / robot.max_x) * 100}%`,
+        transform: "translate(-20px, -5px)",
       }}
       key={robot.id}
     >
@@ -83,21 +120,41 @@ export const RobotPing = ({ robot }: RobotPingProps) => {
                 />
               </div>
               <div className="grid grid-cols-3 items-center gap-4">
+                <Label htmlFor="max_x">Max X</Label>
+                <Input
+                  id="max_x"
+                  defaultValue={robot.max_x}
+                  className="col-span-2 h-8"
+                  disabled
+                />
+              </div>
+              <div className="grid grid-cols-3 items-center gap-4">
+                <Label htmlFor="max_y">Max Y</Label>
+                <Input
+                  id="max_y"
+                  defaultValue={robot.max_y}
+                  className="col-span-2 h-8"
+                  disabled
+                />
+              </div>
+              <div className="grid grid-cols-3 items-center gap-4">
                 <Label htmlFor="x_location">Location (x)</Label>
                 <Input
                   id="x_location"
-                  defaultValue={robot.loc_x}
+                  defaultValue={String(robot.loc_x)}
+                  type="number"
                   className="col-span-2 h-8"
-                  disabled
+                  onChange={(event) => handleXLocChange(event, robot)}
                 />
               </div>
               <div className="grid grid-cols-3 items-center gap-4">
                 <Label htmlFor="y_location">Location (y)</Label>
                 <Input
                   id="y_location"
-                  defaultValue={robot.loc_y}
+                  defaultValue={String(robot.loc_y)}
+                  type="number"
                   className="col-span-2 h-8"
-                  disabled
+                  onChange={(event) => handleYLocChange(event, robot)}
                 />
               </div>
               <div className="grid grid-cols-3 items-center gap-4">
@@ -109,12 +166,39 @@ export const RobotPing = ({ robot }: RobotPingProps) => {
                   disabled
                 />
               </div>
+              <div className="grid grid-cols-3 items-center gap-4 h-8">
+                <Label htmlFor="task">Task</Label>
+                <Select defaultValue="task_1">
+                  <SelectTrigger className="w-[180px]">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="task_1">Task 1</SelectItem>
+                    <SelectItem value="task_2">Task 2</SelectItem>
+                    <SelectItem value="task_3">Task 3</SelectItem>
+                    <SelectItem value="task_4">Task 4</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
               <div className="grid grid-cols-3 items-center gap-4 mt-2">
                 <Label htmlFor="status">Progress</Label>
-                <Progress
-                  value={robot.progress}
-                  className={getStatusClass(robot.status)}
-                />
+                {robot.status == RobotStatus.COMPLETED ? (
+                  <Progress
+                    value={robot.progress}
+                    className="w-full col-span-2 [&>*]:bg-green-500"
+                  />
+                ) : robot.status === RobotStatus.ERROR ? (
+                  <Progress
+                    value={robot.progress}
+                    className="w-full col-span-2 [&>*]:bg-red-500"
+                  />
+                ) : (
+                  <Progress
+                    value={robot.progress}
+                    className="w-full col-span-2"
+                  />
+                )}
               </div>
             </div>
           </div>

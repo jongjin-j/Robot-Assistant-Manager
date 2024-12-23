@@ -28,12 +28,14 @@ import {
 } from "@/components/ui/pagination";
 import { useState } from "react";
 import { getLogs } from "@/lib/utils";
+import { MoveVertical } from "lucide-react";
 
 export default function Logs() {
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredLogs, setFilteredLogs] = useState(getLogs());
   const [currentPage, setCurrentPage] = useState(1);
   const [timeFilter, setTimeFilter] = useState("last_week");
+  const [reversed, setReversed] = useState(false);
 
   const logsPerPage = 15;
 
@@ -163,22 +165,35 @@ export default function Logs() {
             </Pagination>
           </div>
         </div>
-
         <div>
           <Table className="overflow-y-scroll">
             <TableHeader>
               <TableRow>
-                <TableHead className="w-[30%]">Time</TableHead>
+                <TableHead className="w-[30%] flex justify-between items-center">
+                  Time
+                  <MoveVertical
+                    size={16}
+                    className="cursor-pointer"
+                    onClick={() => setReversed(!reversed)}
+                  />
+                </TableHead>
                 <TableHead>Log</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {currentLogs.map((log) => (
-                <TableRow key={log.time}>
-                  <TableCell className="font-medium">{log.time}</TableCell>
-                  <TableCell>{log.message}</TableCell>
-                </TableRow>
-              ))}
+              {reversed
+                ? currentLogs.reverse().map((log) => (
+                    <TableRow key={log.time}>
+                      <TableCell className="font-medium">{log.time}</TableCell>
+                      <TableCell>{log.message}</TableCell>
+                    </TableRow>
+                  ))
+                : currentLogs.map((log) => (
+                    <TableRow key={log.time}>
+                      <TableCell className="font-medium">{log.time}</TableCell>
+                      <TableCell>{log.message}</TableCell>
+                    </TableRow>
+                  ))}
             </TableBody>
           </Table>
         </div>

@@ -7,6 +7,7 @@ export interface Robot {
 	loc_y: number;
 	status: string;
 	progress: number;
+  task: string;
 }
 
 export interface ErrorReport {

@@ -19,7 +19,7 @@ import { useRouter } from "next/navigation";
 
 export default function Dashboard() {
   const { auth } = useAuth()!;
-  const [robots] = useState<Robot[]>(getRobots());
+  const [robots, setRobots] = useState<Robot[]>(getRobots());
   const [errorReports] = useState<ErrorReport[]>(getErrorReports());
 
   const router = useRouter();
@@ -35,7 +35,7 @@ export default function Dashboard() {
       <CustomSidebar />
       <div className="ml-5 grid grid-cols-4 gap-4 flex-grow mt-10">
         <div>
-          <RobotsList robots={robots} />
+          <RobotsList robots={robots} setRobots={setRobots} />
           <ErrorReports errorReports={errorReports} />
         </div>
         <div className="col-span-3 flex flex-col">
@@ -54,7 +54,7 @@ export default function Dashboard() {
           {/* Robot Map */}
           <div className="mt-10 ml-auto mr-auto bg-black w-[80%] h-3/4 rounded-md">
             {robots.map((robot) => (
-              <RobotPing robot={robot} key={robot.id} />
+              <RobotPing robot={robot} setRobots={setRobots} key={robot.id} />
             ))}
           </div>
         </div>
