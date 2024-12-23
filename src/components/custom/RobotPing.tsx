@@ -22,17 +22,6 @@ interface RobotPingProps {
 }
 
 export const RobotPing = ({ robot, setRobots }: RobotPingProps) => {
-  const getStatusClass = (status: string) => {
-    switch (status) {
-      case RobotStatus.COMPLETED:
-        return ColorClassNames.COMPLETED;
-      case RobotStatus.ERROR:
-        return ColorClassNames.ERROR;
-      default:
-        return ColorClassNames.IN_PROGRESS;
-    }
-  };
-
   const getPingStatusClass = (status: string) => {
     switch (status) {
       case RobotStatus.COMPLETED:
