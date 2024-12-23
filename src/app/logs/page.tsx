@@ -26,7 +26,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { getLogs } from "@/lib/utils";
 import { MoveVertical } from "lucide-react";
 
