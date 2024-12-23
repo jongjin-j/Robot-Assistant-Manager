@@ -1,5 +1,8 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Architecture, CI/CD, Design Mockup (Figma)
+[Figma Page](https://www.figma.com/board/ToLXv0kA2gpcM2PGZDVW9E/Robot-Assistant-Manager?node-id=0-1&t=mwrGIv3d4Fe7krlD-1)
+
 ## Getting Started
 
 First, run the development server:
