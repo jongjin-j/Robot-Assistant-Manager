@@ -26,7 +26,6 @@ export enum RobotStatus {
 }
 
 export enum ColorClassNames {
-  IDLE = "w-full col-span-2",
   IN_PROGRESS = "w-full col-span-2",
   COMPLETED = "w-full col-span-2 [&>*]:bg-green-500",
   ERROR = "w-full col-span-2 [&>*]:bg-red-500",
