@@ -1,0 +1,45 @@
+{
+	"robots": 
+    [
+      {
+        "id": "1",
+        "name": "Robot_1",
+        "max_x": 600,
+        "max_y": 500,
+        "loc_x": 100,
+        "loc_y": 100,
+        "status": "Idle",
+        "progress": 0
+      },
+      {
+        "id": "2",
+        "name": "Robot_2",
+        "max_x": 600,
+        "max_y": 500,
+        "loc_x": 300,
+        "loc_y": 400,
+        "status": "In Progress",
+        "progress": 60
+      },
+      {
+        "id": "3",
+        "name": "Robot_3",
+        "max_x": 600,
+        "max_y": 500,
+        "loc_x": 200,
+        "loc_y": 300,
+        "status": "Completed",
+        "progress": 100
+      },
+      {
+        "id": "4",
+        "name": "Robot_4",
+        "max_x": 600,
+        "max_y": 500,
+        "loc_x": 500,
+        "loc_y": 30,
+        "status": "Error",
+        "progress": 60
+      }
+    ]
+}

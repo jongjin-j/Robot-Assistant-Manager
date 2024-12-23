@@ -5,8 +5,12 @@ export interface Robot {
 	max_y: number;
 	loc_x: number;
 	loc_y: number;
-	status: RobotStatus;
+	status: string;
 	progress: number;
+}
+
+export interface ErrorReport {
+  message: string;
 }
 
 export enum RobotStatus {

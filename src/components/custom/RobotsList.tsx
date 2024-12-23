@@ -21,7 +21,7 @@ export const RobotsList = ({ robots }: RobotPingProps) => {
       <div className="bg-gray-500"></div>
       <div key="0" className="p-4">
         <h4 className="mb-4 text-md leading-none text-muted-foreground font-bold">
-          Robots (8)
+          Robots ({robots.length})
         </h4>
         <Separator className="my-2" />
         {robots.map((robot) => (

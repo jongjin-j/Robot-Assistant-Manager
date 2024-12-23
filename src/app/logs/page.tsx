@@ -33,6 +33,7 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 import { useState } from "react";
+import { getRobots } from "@/lib/utils";
 
 const logs = [
   {
@@ -123,6 +124,8 @@ const logs = [
 
 export default function Logs() {
   const { auth, setAuth } = useAuth()!;
+
+  console.log(auth);
 
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredLogs, setFilteredLogs] = useState(logs);
@@ -260,7 +263,6 @@ export default function Logs() {
 
         <div>
           <Table className="overflow-y-scroll">
-            <TableCaption>A list of all the logs</TableCaption>
             <TableHeader>
               <TableRow>
                 <TableHead className="w-[30%]">Time</TableHead>

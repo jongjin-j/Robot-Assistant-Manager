@@ -13,6 +13,7 @@ import {
 import { Gauge, Logs, User2, Bot } from "lucide-react";
 import { Button } from "../ui/button";
 import { redirect } from "next/navigation";
+import { useAuth } from "@/app/provider";
 
 const items = [
   {
@@ -33,6 +34,13 @@ const items = [
 ];
 
 export const CustomSidebar = () => {
+  const { setAuth } = useAuth()!;
+
+  const onLogoutClick = () => {
+    setAuth(null);
+    redirect("/login");
+  };
+
   return (
     <Sidebar>
       <SidebarHeader>
@@ -56,8 +64,12 @@ export const CustomSidebar = () => {
             <SidebarMenu>
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
-                    <a href={item.url}>
+                  <SidebarMenuButton
+                    asChild
+                    onClick={() => redirect(item.url)}
+                    className="cursor-pointer"
+                  >
+                    <a>
                       <item.icon />
                       <span>{item.title}</span>
                     </a>
@@ -72,7 +84,9 @@ export const CustomSidebar = () => {
         <div className="ml-auto mr-0">
           <SidebarMenu>
             <SidebarMenuItem>
-              <Button>Logout</Button>
+              <Button type="button" onClick={onLogoutClick}>
+                Logout
+              </Button>
             </SidebarMenuItem>
           </SidebarMenu>
         </div>

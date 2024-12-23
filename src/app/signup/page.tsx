@@ -21,9 +21,54 @@ import {
 
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useState } from "react";
+import { redirect } from "next/navigation";
 
 export default function SignUp() {
-  const { auth, setAuth } = useAuth()!;
+  const { setAuth } = useAuth()!;
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [association, setAssociation] = useState("");
+
+  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const emailValue = event.target.value;
+    setEmail(emailValue);
+  };
+
+  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const passwordValue = event.target.value;
+    setPassword(passwordValue);
+  };
+
+  const handleConfirmPasswordChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const confirmPasswordValue = event.target.value;
+    setConfirmPassword(confirmPasswordValue);
+  };
+
+  const handleAssociationChange = (value: string) => {
+    setAssociation(value);
+  };
+
+  const onButtonClick = () => {
+    if (
+      password == confirmPassword &&
+      password.length > 0 &&
+      association.length > 0
+    ) {
+      setAuth(email);
+      console.log({
+        email: email,
+        association: association,
+        passwordMatch: true,
+      });
+      redirect("/");
+    } else {
+      console.log("Passwords do not match");
+    }
+  };
 
   return (
     <div className="ml-auto mr-auto">
@@ -50,25 +95,34 @@ export default function SignUp() {
                       type="email"
                       placeholder="m@example.com"
                       required
+                      onChange={handleEmailChange}
                     />
                   </div>
                   <div className="grid gap-2">
                     <div className="flex items-center">
                       <Label htmlFor="password">Password</Label>
                     </div>
-                    <Input id="password" required />
+                    <Input
+                      id="password"
+                      onChange={handlePasswordChange}
+                      required
+                    />
                   </div>
                   <div className="grid gap-2">
                     <div className="flex items-center">
                       <Label htmlFor="password">Confirm Password</Label>
                     </div>
-                    <Input id="password-confirm" required />
+                    <Input
+                      id="password-confirm"
+                      onChange={handleConfirmPasswordChange}
+                      required
+                    />
                   </div>
                   <div className="grid gap-2">
                     <div className="flex items-center">
                       <Label>Association</Label>
                     </div>
-                    <Select>
+                    <Select onValueChange={handleAssociationChange}>
                       <SelectTrigger>
                         <SelectValue placeholder="Select your association" />
                       </SelectTrigger>
@@ -94,13 +148,17 @@ export default function SignUp() {
                       </SelectContent>
                     </Select>
                   </div>
-                  <Button type="submit" className="w-full">
+                  <Button
+                    type="button"
+                    className="w-full"
+                    onClick={onButtonClick}
+                  >
                     Sign Up
                   </Button>
                 </div>
                 <div className="mt-4 text-center text-sm">
                   Already a user?{" "}
-                  <a href="#" className="underline underline-offset-4">
+                  <a href="/login" className="underline underline-offset-4">
                     Sign In
                   </a>
                 </div>

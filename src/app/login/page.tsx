@@ -11,9 +11,29 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { redirect } from "next/navigation";
+import { useState } from "react";
 
 export default function Login() {
-  const { auth, setAuth } = useAuth()!;
+  const { setAuth } = useAuth()!;
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const emailValue = event.target.value;
+    setEmail(emailValue);
+  };
+
+  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const passwordValue = event.target.value;
+    setPassword(passwordValue);
+  };
+
+  const onButtonClick = () => {
+    console.log(email, password[0]);
+    setAuth(email);
+    redirect("/");
+  };
 
   return (
     <div className="ml-auto mr-auto">
@@ -42,6 +62,7 @@ export default function Login() {
                       type="email"
                       placeholder="m@example.com"
                       required
+                      onChange={handleEmailChange}
                     />
                   </div>
                   <div className="grid gap-2">
@@ -54,15 +75,24 @@ export default function Login() {
                         Forgot your password?
                       </a>
                     </div>
-                    <Input id="password" type="password" required />
+                    <Input
+                      id="password"
+                      type="password"
+                      required
+                      onChange={handlePasswordChange}
+                    />
                   </div>
-                  <Button type="submit" className="w-full">
+                  <Button
+                    type="button"
+                    className="w-full"
+                    onClick={onButtonClick}
+                  >
                     Login
                   </Button>
                 </div>
                 <div className="mt-4 text-center text-sm">
                   Don&apos;t have an account?{" "}
-                  <a href="#" className="underline underline-offset-4">
+                  <a href="/signup" className="underline underline-offset-4">
                     Sign up
                   </a>
                 </div>
