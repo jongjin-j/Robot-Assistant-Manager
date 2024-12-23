@@ -21,7 +21,8 @@ export const getRobots = (): Robot[] => {
       loc_x: robot.loc_x,
       loc_y: robot.loc_y,
       status: robot.status, 
-      progress: robot.progress
+      progress: robot.progress,
+      task: robot.task
     })
   })
 
