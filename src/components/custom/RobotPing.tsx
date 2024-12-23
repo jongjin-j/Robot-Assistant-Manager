@@ -1,12 +1,7 @@
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
-import {
-  Robot,
-  RobotStatus,
-  ColorClassNames,
-  AnimateColorClassNames,
-} from "@/lib/types";
+import { Robot, RobotStatus, AnimateColorClassNames } from "@/lib/types";
 import {
   Select,
   SelectContent,
