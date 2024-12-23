@@ -30,11 +30,7 @@ export default function Dashboard() {
     }
   }, [auth, router]);
 
-  if (!auth) {
-    return <div>LOADING</div>;
-  }
-
-  return (
+  return auth ? (
     <div className="flex w-full">
       <CustomSidebar />
       <div className="ml-5 grid grid-cols-4 gap-4 flex-grow mt-10">
@@ -64,5 +60,7 @@ export default function Dashboard() {
         </div>
       </div>
     </div>
+  ) : (
+    <div>Loading</div>
   );
 }
