@@ -1,8 +1,6 @@
 "use client";
 
 import { useAuth } from "../provider";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Separator } from "@/components/ui/separator";
 import { CustomSidebar } from "@/components/custom/CustomSidebar";
 import {
   Select,
@@ -25,7 +23,8 @@ import {
 import { Label } from "@/components/ui/label";
 
 export default function Logs() {
-  const { auth, setAuth } = useAuth()!;
+  const { auth } = useAuth()!;
+
   return (
     <div className="flex w-full">
       <CustomSidebar />
@@ -43,21 +42,25 @@ export default function Logs() {
                   <Input
                     id="email"
                     type="email"
-                    placeholder="m@example.com"
-                    required
+                    placeholder={
+                      auth?.includes(" ")
+                        ? auth?.split(" ")[0]
+                        : auth
+                        ? auth
+                        : undefined
+                    }
+                    disabled
                   />
-                </div>
-                <div className="grid gap-2">
-                  <div className="flex items-center">
-                    <Label htmlFor="password">Password</Label>
-                  </div>
-                  <Input id="password" type="password" required />
                 </div>
                 <div className="grid gap-2">
                   <div className="flex items-center">
                     <Label>Association</Label>
                   </div>
-                  <Select>
+                  <Select
+                    value={
+                      auth?.includes(" ") ? auth?.split(" ")[1] : undefined
+                    }
+                  >
                     <SelectTrigger>
                       <SelectValue placeholder="Select your association" />
                     </SelectTrigger>

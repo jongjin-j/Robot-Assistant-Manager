@@ -13,6 +13,11 @@ export interface ErrorReport {
   message: string;
 }
 
+export interface Log {
+  time: string;
+  message: string;
+}
+
 export enum RobotStatus {
   IDLE = "Idle",
   IN_PROGRESS = "In Progress",

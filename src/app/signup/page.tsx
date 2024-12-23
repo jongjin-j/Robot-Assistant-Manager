@@ -58,7 +58,7 @@ export default function SignUp() {
       password.length > 0 &&
       association.length > 0
     ) {
-      setAuth(email);
+      setAuth(email + " " + association);
       console.log({
         email: email,
         association: association,

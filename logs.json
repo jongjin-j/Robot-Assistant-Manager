@@ -1,0 +1,88 @@
+{
+	"logs": [
+		{
+			"time": "Dec 20, 2024 @ 20:00:00",
+			"message": "Example log"
+		},
+		{
+			"time": "Dec 20, 2024 @ 20:00:05",
+			"message": "Example logs"
+		},
+		{
+			"time": "Dec 20, 2024 @ 20:00:10",
+			"message": "Example log"
+		},
+		{
+			"time": "Dec 20, 2024 @ 20:00:20",
+			"message": "Example log"
+		},
+		{
+			"time": "Dec 20, 2024 @ 20:00:30",
+			"message": "Example log"
+		},
+		{
+			"time": "Dec 20, 2024 @ 20:00:40",
+			"message": "Example logs"
+		},
+		{
+			"time": "Dec 20, 2024 @ 20:00:50",
+			"message": "Example logs"
+		},
+		{
+			"time": "Dec 21, 2024 @ 20:00:00",
+			"message": "Example logs"
+		},
+		{
+			"time": "Dec 21, 2024 @ 20:00:05",
+			"message": "Example log"
+		},
+		{
+			"time": "Dec 21, 2024 @ 20:00:10",
+			"message": "Example log"
+		},
+		{
+			"time": "Dec 21, 2024 @ 20:00:20",
+			"message": "Example logs"
+		},
+		{
+			"time": "Dec 21, 2024 @ 20:00:30",
+			"message": "Example logs"
+		},
+		{
+			"time": "Dec 21, 2024 @ 20:00:40",
+			"message": "Example logs"
+		},
+		{
+			"time": "Dec 21, 2024 @ 20:00:50",
+			"message": "Example log"
+		},
+		{
+			"time": "Dec 22, 2024 @ 20:00:00",
+			"message": "Example logs"
+		},
+		{
+			"time": "Dec 22, 2024 @ 20:00:05",
+			"message": "Example logs"
+		},
+		{
+			"time": "Dec 22, 2024 @ 20:00:10",
+			"message": "Example logs"
+		},
+		{
+			"time": "Dec 22, 2024 @ 20:00:20",
+			"message": "Example log"
+		},
+		{
+			"time": "Dec 22, 2024 @ 20:00:30",
+			"message": "Example logs"
+		},
+		{
+			"time": "Dec 22, 2024 @ 20:00:40",
+			"message": "Example logs"
+		},
+		{
+			"time": "Dec 22, 2024 @ 20:00:50",
+			"message": "Example logs"
+		}
+  ]
+}

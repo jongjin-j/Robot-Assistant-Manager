@@ -1,8 +1,5 @@
 "use client";
 
-import { useAuth } from "../provider";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Separator } from "@/components/ui/separator";
 import { CustomSidebar } from "@/components/custom/CustomSidebar";
 import {
   Select,
@@ -16,9 +13,7 @@ import { Input } from "@/components/ui/input";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
-  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
@@ -26,109 +21,17 @@ import {
 import {
   Pagination,
   PaginationContent,
-  PaginationEllipsis,
   PaginationItem,
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
 import { useState } from "react";
-import { getRobots } from "@/lib/utils";
-
-const logs = [
-  {
-    time: "Dec 20, 2024 @ 20:00:00",
-    message: "Example log",
-  },
-  {
-    time: "Dec 20, 2024 @ 20:00:05",
-    message: "Example logs",
-  },
-  {
-    time: "Dec 20, 2024 @ 20:00:10",
-    message: "Example log",
-  },
-  {
-    time: "Dec 20, 2024 @ 20:00:20",
-    message: "Example log",
-  },
-  {
-    time: "Dec 20, 2024 @ 20:00:30",
-    message: "Example log",
-  },
-  {
-    time: "Dec 20, 2024 @ 20:00:40",
-    message: "Example logs",
-  },
-  {
-    time: "Dec 20, 2024 @ 20:00:50",
-    message: "Example logs",
-  },
-  {
-    time: "Dec 21, 2024 @ 20:00:00",
-    message: "Example logs",
-  },
-  {
-    time: "Dec 21, 2024 @ 20:00:05",
-    message: "Example log",
-  },
-  {
-    time: "Dec 21, 2024 @ 20:00:10",
-    message: "Example log",
-  },
-  {
-    time: "Dec 21, 2024 @ 20:00:20",
-    message: "Example logs",
-  },
-  {
-    time: "Dec 21, 2024 @ 20:00:30",
-    message: "Example logs",
-  },
-  {
-    time: "Dec 21, 2024 @ 20:00:40",
-    message: "Example logs",
-  },
-  {
-    time: "Dec 21, 2024 @ 20:00:50",
-    message: "Example log",
-  },
-  {
-    time: "Dec 22, 2024 @ 20:00:00",
-    message: "Example logs",
-  },
-  {
-    time: "Dec 22, 2024 @ 20:00:05",
-    message: "Example logs",
-  },
-  {
-    time: "Dec 22, 2024 @ 20:00:10",
-    message: "Example logs",
-  },
-  {
-    time: "Dec 22, 2024 @ 20:00:20",
-    message: "Example log",
-  },
-  {
-    time: "Dec 22, 2024 @ 20:00:30",
-    message: "Example logs",
-  },
-  {
-    time: "Dec 22, 2024 @ 20:00:40",
-    message: "Example logs",
-  },
-  {
-    time: "Dec 22, 2024 @ 20:00:50",
-    message: "Example logs",
-  },
-];
+import { getLogs } from "@/lib/utils";
 
 export default function Logs() {
-  const { auth, setAuth } = useAuth()!;
-
-  console.log(auth);
-
   const [searchTerm, setSearchTerm] = useState("");
-  const [filteredLogs, setFilteredLogs] = useState(logs);
+  const [filteredLogs, setFilteredLogs] = useState(getLogs());
   const [currentPage, setCurrentPage] = useState(1);
   const [timeFilter, setTimeFilter] = useState("last_week");
 
@@ -153,7 +56,7 @@ export default function Logs() {
 
   const filterLogs = (searchTerm: string, timeFilter: string) => {
     const now = Date.now();
-    const filteredByTime = logs.filter((log) => {
+    const filteredByTime = getLogs().filter((log) => {
       const logTimestamp = parseLogTime(log.time);
       let timeLimit;
 

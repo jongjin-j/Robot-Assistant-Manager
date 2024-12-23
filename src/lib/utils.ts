@@ -2,7 +2,8 @@ import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
 import robotData from "../../robots.json";
 import reportData from "../../reports.json";
-import { ErrorReport, Robot } from "./types";
+import logData from "../../logs.json";
+import { ErrorReport, Robot, Log } from "./types";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -37,4 +38,17 @@ export const getErrorReports = () => {
   })
 
   return deserializedErrorReportsData;
+};
+
+export const getLogs = () => {
+  const deserializedLogData: Log[] = [];
+
+    logData.logs.forEach((log) => {
+      deserializedLogData.push({
+        time: log.time,
+        message: log.message
+    })
+  })
+
+  return deserializedLogData;
 };

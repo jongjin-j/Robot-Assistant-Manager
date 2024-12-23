@@ -19,12 +19,8 @@ import { useRouter } from "next/navigation";
 
 export default function Dashboard() {
   const { auth } = useAuth()!;
-  const [robots, setRobots] = useState<Robot[]>(getRobots());
-  const [errorReports, setErrorReports] = useState<ErrorReport[]>(
-    getErrorReports()
-  );
-
-  console.log(auth);
+  const [robots] = useState<Robot[]>(getRobots());
+  const [errorReports] = useState<ErrorReport[]>(getErrorReports());
 
   const router = useRouter();
 
