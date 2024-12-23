@@ -26,7 +26,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { getLogs } from "@/lib/utils";
 import { MoveVertical } from "lucide-react";
 
@@ -96,7 +96,9 @@ export default function Logs() {
 
   const lastLogIndex = currentPage * logsPerPage;
   const firstLogIndex = lastLogIndex - logsPerPage;
-  const currentLogs = filteredLogs.slice(firstLogIndex, lastLogIndex);
+  const currentLogs = reversed
+    ? filteredLogs.slice().reverse().slice(firstLogIndex, lastLogIndex)
+    : filteredLogs.slice(firstLogIndex, lastLogIndex);
 
   const goToPage = (page: number) => {
     setCurrentPage(page);
@@ -181,19 +183,12 @@ export default function Logs() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {reversed
-                ? currentLogs.reverse().map((log) => (
-                    <TableRow key={log.time}>
-                      <TableCell className="font-medium">{log.time}</TableCell>
-                      <TableCell>{log.message}</TableCell>
-                    </TableRow>
-                  ))
-                : currentLogs.map((log) => (
-                    <TableRow key={log.time}>
-                      <TableCell className="font-medium">{log.time}</TableCell>
-                      <TableCell>{log.message}</TableCell>
-                    </TableRow>
-                  ))}
+              {currentLogs.map((log) => (
+                <TableRow key={log.time}>
+                  <TableCell className="font-medium">{log.time}</TableCell>
+                  <TableCell>{log.message}</TableCell>
+                </TableRow>
+              ))}
             </TableBody>
           </Table>
         </div>

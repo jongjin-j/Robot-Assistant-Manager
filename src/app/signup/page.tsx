@@ -105,6 +105,7 @@ export default function SignUp() {
                     <Input
                       id="password"
                       onChange={handlePasswordChange}
+                      type="password"
                       required
                     />
                   </div>
@@ -115,6 +116,7 @@ export default function SignUp() {
                     <Input
                       id="password-confirm"
                       onChange={handleConfirmPasswordChange}
+                      type="password"
                       required
                     />
                   </div>
